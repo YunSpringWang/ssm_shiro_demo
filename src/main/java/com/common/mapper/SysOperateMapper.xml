@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.SysOperateMapper">
+  <resultMap id="BaseResultMap" type="com.common.entity.SysOperate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="op" jdbcType="VARCHAR" property="op" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="ordno" jdbcType="INTEGER" property="ordno" />
+    <result column="display" jdbcType="INTEGER" property="display" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  
+</mapper>

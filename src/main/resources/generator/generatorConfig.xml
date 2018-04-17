@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<properties resource="generator/generator-config.properties" />
+	<!-- classPathEntry:数据库的JDBC驱动 -->
+	<classPathEntry location="${classPathEntry}" />
+	<context id="Mysql" targetRuntime="MyBatis3Simple"
+		defaultModelType="flat">
+		<!-- 生成的Java文件的编码 -->
+		<property name="javaFileEncoding" value="UTF-8" />
+		<!-- 格式化java代码 -->
+		<!--<property name="javaFormatter" value="org.mybatis.test.generator.api.dom.DefaultJavaFormatter"/> -->
+		<!-- 格式化XML代码 -->
+		<!--<property name="xmlFormatter" value="org.mybatis.test.generator.api.dom.DefaultXmlFormatter"/> -->
+		<!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+
+
+
+		<!-- 去除自动生成的注释 -->
+		<commentGenerator>
+		    <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="${jdbc.driverClass}"
+			connectionURL="${jdbc.url}" userId="${jdbc.user}" password="${jdbc.password}" />
+
+		<!-- java类型处理器 用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl； 注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 
+			NUMERIC数据类型 -->
+		<!--<javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl"> -->
+		<!--<property name="forceBigDecimals" value="false"/> -->
+		<!--</javaTypeResolver> -->
+
+		<!-- targetProject:自动生成代码的位置 -->
+		<javaModelGenerator targetPackage="${targetModelPackage}"
+			targetProject="${targetJavaProject}">
+			<property name="enableSubPackages" value="true" />
+			<!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
+			<property name="trimStrings" value="true" />
+			<property name="constructorBased" value="false" />
+			<!-- 设置一个根对象， 如果设置了这个根对象，那么生成的keyClass或者recordClass会继承这个类；在Table的rootClass属性中可以覆盖该选项 
+				注意：如果在key class或者record class中有root class相同的属性，MBG就不会重新生成这些属性了，包括： 1，属性名相同，类型相同，有相同的getter/setter方法； -->
+			<property name="rootClass" value="com.base.baseEntity.RecordEntity" />
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+			<property name="useActualColumnNames" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="${targetXMLPackage}"
+			targetProject="${targetJavaProject}">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}">
+			<property name="enableSubPackages" value="true" />
+			 <!-- 可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查-->
+        	<property name="rootInterface" value="com.base.baseEntity.BaseMapper"/>
+		</javaClientGenerator>
+<!-- 
+        1，schema：数据库的schema；
+        2，catalog：数据库的catalog；
+        3，alias：为数据表设置的别名，如果设置了alias，那么生成的所有的SELECT SQL语句中，列名会变成：alias_actualColumnName
+        4，domainObjectName：生成的domain类的名字，如果不设置，直接使用表名作为domain类的名字；可以设置为somepck.domainName，那么会自动把domainName类再放到somepck包里面；
+        5，enableInsert（默认true）：指定是否生成insert语句；
+        6，enableSelectByPrimaryKey（默认true）：指定是否生成按照主键查询对象的语句（就是getById或get）；
+        7，enableSelectByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询语句；
+        8，enableUpdateByPrimaryKey（默认true）：指定是否生成按照主键修改对象的语句（即update)；
+        9，enableDeleteByPrimaryKey（默认true）：指定是否生成按照主键删除对象的语句（即delete）；
+        10，enableDeleteByExample（默认true）：MyBatis3Simple为false，指定是否生成动态删除语句；
+        11，enableCountByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询总条数语句（用于分页的总条数查询）；
+        12，enableUpdateByExample（默认true）：MyBatis3Simple为false，指定是否生成动态修改语句（只修改对象中不为空的属性）；
+        13，modelType：参考context元素的defaultModelType，相当于覆盖；
+        14，delimitIdentifiers：参考tableName的解释，注意，默认的delimitIdentifiers是双引号，如果类似MYSQL这样的数据库，使用的是`（反引号，那么还需要设置context的beginningDelimiter和endingDelimiter属性）
+        15，delimitAllColumns：设置是否所有生成的SQL中的列名都使用标识符引起来。默认为false，delimitIdentifiers参考context的属性
+
+     -->
+		<table tableName="t_sys_log" domainObjectName="SysLog"
+			enableCountByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" enableUpdateByExample="true" >
+			
+		</table>
+		<table tableName="t_sys_manager" domainObjectName="SysManager"
+			enableCountByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" enableUpdateByExample="true">
+		</table>
+		<table tableName="t_sys_menu" domainObjectName="SysMenu"
+			enableCountByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" enableUpdateByExample="true">
+		</table>
+		<table tableName="t_sys_operate" domainObjectName="SysOperate"
+			enableCountByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" enableUpdateByExample="true">
+		</table>
+		<table tableName="t_sys_role" domainObjectName="SysRole"
+			enableCountByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" enableUpdateByExample="true">
+		</table>
+		<table tableName="t_sys_role_operate" domainObjectName="SysRoleOperate"
+			enableCountByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" enableUpdateByExample="true">
+		</table>
+
+	</context>
+
+</generatorConfiguration>
+

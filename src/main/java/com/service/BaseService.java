@@ -1,0 +1,110 @@
+package com.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.github.pagehelper.PageInfo;
+
+public interface BaseService<T> {
+
+	/**
+	 * 新增一个实体，方法的实现需保证：当返回true时，实体entity的id属性已被赋值。
+	 *
+	 * @param entity
+	 *            操作对象
+	 * @return 操作结果
+	 */
+	boolean insert(T entity);
+
+	/**
+	 * Null字段使用数据库默认值
+	 *
+	 * @param entity
+	 *            操作对象
+	 * @return 操作结果
+	 */
+	boolean insertSelective(T entity);
+
+	/**
+	 * 根据主键删除一个实体
+	 *
+	 * @param key
+	 *            主键
+	 * @return 操作结果
+	 */
+	boolean deleteById(Object key);
+
+
+	/**
+	 * 根据主键更新实体全部字段( 公共属性部分不必赋值，入库拦截前会自动将修改人 修改时间加上)
+	 *
+	 * @param entity
+	 *            操作对象
+	 * @return 操作结果
+	 */
+	boolean updateById(T entity);
+
+	/**
+	 * 根据主键更新不为NUll的值
+	 *
+	 * @param entity
+	 *            操作对象
+	 * @return 操作结果
+	 */
+	boolean updateSelectiveById(T entity);
+
+	/**
+	 * 根据主键字段进行查询
+	 *
+	 * @param key
+	 *            主键
+	 * @return 操作结果
+	 */
+	Optional<T> queryById(Object key);
+	/**
+	 * 查询一条记录
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public T queryOne(T param);
+
+	/**
+	 * 查询所有数据
+	 *
+	 * @return 查询结果
+	 */
+	List<T> queryAll();
+
+	/**
+	 * 条件查询
+	 * 
+	 * @param param
+	 * @return
+	 */
+	public List<T> queryListByWhere(T param);
+
+	/**
+	 * 查询记录数
+	 * @param param
+	 * @return
+	 */
+	public Integer queryCount(T param);
+
+	/**
+	 * 分页查询
+	 * @param param
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	public PageInfo<T> queryPageListByWhere(T param, Integer page, Integer rows);
+
+	/**
+	 * 批量删除
+	 * @param clazz
+	 * @param values
+	 * @return
+	 */
+	public Integer deleteByIds(Class<T> clazz, List<Object> values);
+}
